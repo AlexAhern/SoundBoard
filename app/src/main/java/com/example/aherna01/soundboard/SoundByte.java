@@ -1,5 +1,8 @@
 package com.example.aherna01.soundboard;
 
+import android.app.Activity;
+import android.content.Context;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 
 /**
@@ -7,19 +10,26 @@ import android.net.Uri;
  */
 
 public class SoundByte {
-    private String title;
-    public int resource;
+    private Activity activity;
+    private Uri soundClipUri;
 
-    public SoundByte(String title, int file){
-        this.title = title;
-        this.resource = file;
+    public SoundByte(Activity activity, int resource) {
+        this.soundClipUri = getResourcePath(resource);
     }
 
     public String getTitle() {
-        return title;
+        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+        mmr.setDataSource(activity, soundClipUri);
+        return mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
     }
 
-    public Uri getResourcePath() {
-        return Uri.parse("android.resource://com.example.aherna01.soundboard/"+ resource);
+
+    public Uri getSoundClipUri() {
+        return soundClipUri;
     }
+
+    public Uri getResourcePath(int resource) {
+        return Uri.parse("android.resource://com.example.aherna01.soundboard/" + resource);
+    }
+
 }

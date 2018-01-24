@@ -9,9 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 public class SoundBoardActivity extends AppCompatActivity {
+    private SoundByteListGenerator soundByteListGenerator = new SoundByteListGenerator(this);
     private MediaPlayer player = new SoundBytePlayer();
-    private SoundByte[] soundBytes = {new SoundByte("Star Wars", R.raw.starwars),
-            new SoundByte("Analogue Clock", R.raw.analogwatch)};
+    private SoundByte[] soundBytes = soundByteListGenerator.generateList();
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
