@@ -10,7 +10,7 @@ public class SoundByte implements Comparable<SoundByte>{
     private String title;
 
     public SoundByte(Context context, int resource) {
-        this.soundClipUri = Uri.parse("android.resource://com.example.aherna01.soundboard/" + resource);
+        this.soundClipUri = Uri.parse("android.resource://com.ahernapps.android.soundboard/" + resource);
         this.title = getTitleFromMetadata(context);
     }
 
