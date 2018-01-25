@@ -1,4 +1,4 @@
-package com.example.aherna01.soundboard;
+package com.ahernapps.android.soundboard;
 
 import org.junit.Test;
 

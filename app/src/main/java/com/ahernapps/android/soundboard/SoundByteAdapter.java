@@ -1,4 +1,4 @@
-package com.example.aherna01.soundboard;
+package com.ahernapps.android.soundboard;
 
 import android.media.MediaPlayer;
 import android.support.v7.widget.RecyclerView;

@@ -1,4 +1,4 @@
-package com.example.aherna01.soundboard;
+package com.ahernapps.android.soundboard;
 
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;

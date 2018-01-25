@@ -1,4 +1,4 @@
-<com.example.aherna01.soundboard.SoundByteButton
+<com.ahernapps.android.soundboard.SoundByteButton
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,4 +10,4 @@
     android:fontFamily="sans-serif-black"
     >
 
-</com.example.aherna01.soundboard.SoundByteButton>
+</com.ahernapps.android.soundboard.SoundByteButton>
