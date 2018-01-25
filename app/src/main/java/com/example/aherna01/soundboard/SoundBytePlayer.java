@@ -5,10 +5,6 @@ import android.media.MediaPlayer;
 
 import java.io.IOException;
 
-/**
- * Created by aherna01 on 22/01/2018.
- */
-
 public class SoundBytePlayer extends MediaPlayer {
 
 

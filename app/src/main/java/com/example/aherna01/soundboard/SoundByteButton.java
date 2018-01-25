@@ -6,10 +6,6 @@ import android.view.View;
 
 import java.io.IOException;
 
-/**
- * Created by aherna01 on 22/01/2018.
- */
-
 public class SoundByteButton extends android.support.v7.widget.AppCompatButton {
     private SoundByte soundByte;
     private SoundBytePlayer player;
@@ -22,7 +18,7 @@ public class SoundByteButton extends android.support.v7.widget.AppCompatButton {
                     player.stop();
                     player.reset();
                 }
-                player.setDataSource(SoundByteButton.this.getContext(), soundByte.getResourcePath());
+                player.setDataSource(SoundByteButton.this.getContext(), soundByte.getSoundClipUri());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -39,8 +35,8 @@ public class SoundByteButton extends android.support.v7.widget.AppCompatButton {
     }
 
     public void setSoundByte(SoundByte soundByte) throws IOException {
-        this.setText(soundByte.getTitle());
         this.soundByte = soundByte;
+        this.setText(soundByte.getTitle());
         this.setOnClickListener(soundByteButtonClickListener);
     }
 

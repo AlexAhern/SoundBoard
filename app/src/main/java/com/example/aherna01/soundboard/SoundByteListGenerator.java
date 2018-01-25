@@ -1,26 +1,30 @@
 package com.example.aherna01.soundboard;
 
-import android.app.Activity;
+import android.content.Context;
 
 import java.lang.reflect.Field;
-
-/**
- * Created by aherna01 on 24/01/2018.
- */
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class SoundByteListGenerator {
-    private final Activity activity;
+    private final Context context;
 
-    public SoundByteListGenerator(Activity activity){
-        this.activity = activity;
+    public SoundByteListGenerator(Context context){
+        this.context = context;
 
     }
-    public SoundByte[] generateList(){
+
+    public ArrayList<SoundByte> generateList(){
         Field[] fields = R.raw.class.getFields();
-        SoundByte[] soundByteList = new SoundByte[fields.length];
+        ArrayList<SoundByte> soundByteList = new ArrayList<>();
         for(int count=0; count < fields.length; count++){
-            soundByteList[count] = new SoundByte(activity, Integer.parseInt(fields[count].getName()));
+            try {
+                soundByteList.add(new SoundByte(context, fields[count].getInt(null)));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
+        Collections.sort(soundByteList);
         return soundByteList;
     }
 }

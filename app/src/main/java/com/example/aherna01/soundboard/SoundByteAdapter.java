@@ -7,13 +7,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import java.io.IOException;
-
-/**
- * Created by aherna01 on 22/01/2018.
- */
+import java.util.ArrayList;
 
 public class SoundByteAdapter extends RecyclerView.Adapter<SoundByteAdapter.ViewHolder> {
-    private SoundByte[] mSoundBytes;
+    private ArrayList<SoundByte> mSoundBytes;
     private SoundBytePlayer mPlayer;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -24,7 +21,7 @@ public class SoundByteAdapter extends RecyclerView.Adapter<SoundByteAdapter.View
         }
     }
 
-    public SoundByteAdapter(MediaPlayer player, SoundByte[] soundBytes){
+    public SoundByteAdapter(MediaPlayer player, ArrayList<SoundByte> soundBytes){
         mPlayer = (SoundBytePlayer) player;
         mSoundBytes = soundBytes;
     }
@@ -42,7 +39,7 @@ public class SoundByteAdapter extends RecyclerView.Adapter<SoundByteAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         try {
             holder.mButton.setPlayer(mPlayer);
-            holder.mButton.setSoundByte(mSoundBytes[position]);
+            holder.mButton.setSoundByte(mSoundBytes.get(position));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,7 +47,7 @@ public class SoundByteAdapter extends RecyclerView.Adapter<SoundByteAdapter.View
 
     @Override
     public int getItemCount() {
-        return mSoundBytes.length;
+        return mSoundBytes.size();
     }
 
 

@@ -1,35 +1,35 @@
 package com.example.aherna01.soundboard;
 
-import android.app.Activity;
 import android.content.Context;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
-/**
- * Created by aherna01 on 22/01/2018.
- */
-
-public class SoundByte {
-    private Activity activity;
+public class SoundByte implements Comparable<SoundByte>{
     private Uri soundClipUri;
+    private String title;
 
-    public SoundByte(Activity activity, int resource) {
-        this.soundClipUri = getResourcePath(resource);
+    public SoundByte(Context context, int resource) {
+        this.soundClipUri = Uri.parse("android.resource://com.example.aherna01.soundboard/" + resource);
+        this.title = getTitleFromMetadata(context);
     }
 
     public String getTitle() {
-        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-        mmr.setDataSource(activity, soundClipUri);
-        return mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+        return title;
     }
 
+    private String getTitleFromMetadata(Context context){
+        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+        mmr.setDataSource(context, getSoundClipUri());
+        return mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+    }
 
     public Uri getSoundClipUri() {
         return soundClipUri;
     }
 
-    public Uri getResourcePath(int resource) {
-        return Uri.parse("android.resource://com.example.aherna01.soundboard/" + resource);
+    @Override
+    public int compareTo(@NonNull SoundByte soundByte) {
+        return this.getTitle().compareTo(soundByte.getTitle());
     }
-
 }
