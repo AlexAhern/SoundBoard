@@ -1,4 +1,4 @@
-package com.ahernapps.android.soundboard;
+package com.ahernapps.android.pbsoundboard;
 
 import org.junit.Test;
 

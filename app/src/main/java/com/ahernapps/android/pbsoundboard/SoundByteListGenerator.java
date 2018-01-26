@@ -1,4 +1,4 @@
-package com.ahernapps.android.soundboard;
+package com.ahernapps.android.pbsoundboard;
 
 import android.content.Context;
 
@@ -9,17 +9,17 @@ import java.util.Collections;
 public class SoundByteListGenerator {
     private final Context context;
 
-    public SoundByteListGenerator(Context context){
+    public SoundByteListGenerator(Context context) {
         this.context = context;
-
     }
 
-    public ArrayList<SoundByte> generateList(){
+    public ArrayList<SoundByte> generateList() {
         Field[] fields = R.raw.class.getFields();
         ArrayList<SoundByte> soundByteList = new ArrayList<>();
-        for(int count=0; count < fields.length; count++){
+        for (int count = 0; count < fields.length; count++) {
             try {
-                soundByteList.add(new SoundByte(context, fields[count].getInt(null)));
+                int id = fields[count].getInt(null);
+                soundByteList.add(new SoundByte(context, id));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
