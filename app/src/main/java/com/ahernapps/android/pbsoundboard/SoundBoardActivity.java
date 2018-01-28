@@ -1,7 +1,7 @@
 package com.ahernapps.android.pbsoundboard;
 
+import android.content.res.AssetManager;
 import android.media.AudioAttributes;
-import android.media.MediaMetadataRetriever;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +20,8 @@ public class SoundBoardActivity extends AppCompatActivity {
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .build()).build();
 
-    private final MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+    private MediaMetadataResolver mediaMetadataResolver = new SoundMetadataResolver(this);
 
-
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sound_board);
@@ -35,13 +32,14 @@ public class SoundBoardActivity extends AppCompatActivity {
 
         RecyclerView mRecyclerView = findViewById(R.id.soundbyte_recyclerview);
 
-
-
         RecyclerView.LayoutManager mLayoutManager =
                 new GridLayoutManager(this, 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        RecyclerView.Adapter mAdapter = new SoundByteAdapter(this, player, mmr
+        RecyclerView.Adapter mAdapter = new SoundByteAdapter(
+                this,
+                mediaMetadataResolver,
+                player
                 , soundResources);
         mRecyclerView.setAdapter(mAdapter);
 

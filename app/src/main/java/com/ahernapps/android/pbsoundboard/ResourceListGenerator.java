@@ -2,6 +2,7 @@ package com.ahernapps.android.pbsoundboard;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 class ResourceListGenerator {
@@ -17,6 +18,7 @@ class ResourceListGenerator {
                 e.printStackTrace();
             }
         }
+        Collections.sort(resourceList);
         return resourceList;
     }
 }
