@@ -3,17 +3,17 @@ package com.ahernapps.android.pbsoundboard;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
-class ResourceListGenerator {
+class SoundByteListGenerator {
 
-    static List<Integer> generateList() {
+    static ArrayList<? extends MediaAsset> generateList(MediaPlayer player, MediaMetadataResolver mediaMetadataResolver) {
         Field[] fields = R.raw.class.getFields();
-        ArrayList<Integer> resourceList = new ArrayList<>();
+        ArrayList<SoundByte> resourceList = new ArrayList<>();
         for (Field field : fields) {
             try {
-                int id = field.getInt(null);
-                resourceList.add(id);
+                int resourceID = field.getInt(null);
+                resourceList.add(new SoundByte(mediaMetadataResolver.resolve(resourceID),
+                        player.load(resourceID)));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }

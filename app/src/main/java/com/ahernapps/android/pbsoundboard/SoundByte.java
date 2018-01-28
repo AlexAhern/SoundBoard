@@ -2,12 +2,12 @@ package com.ahernapps.android.pbsoundboard;
 
 import android.support.annotation.NonNull;
 
-class SoundByte implements Comparable<SoundByte> {
-    private final int soundID;
+class SoundByte implements Comparable<SoundByte>, MediaAsset {
+    private final int resource;
     private final String title;
 
-    SoundByte(String title, int soundID) {
-        this.soundID = soundID;
+    SoundByte(String title, int mediaIdentifier) {
+        this.resource = mediaIdentifier;
         this.title = title;
     }
 
@@ -15,8 +15,8 @@ class SoundByte implements Comparable<SoundByte> {
         return title;
     }
 
-    int getSoundID() {
-        return soundID;
+    int getResource() {
+        return resource;
     }
 
 

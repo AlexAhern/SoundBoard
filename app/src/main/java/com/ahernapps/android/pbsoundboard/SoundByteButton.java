@@ -1,7 +1,6 @@
 package com.ahernapps.android.pbsoundboard;
 
 import android.content.Context;
-import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -12,7 +11,7 @@ public class SoundByteButton extends android.support.v7.widget.AppCompatButton {
     private final OnClickListener soundByteButtonClickListener = new OnClickListener() {
         @Override
         public void onClick(View view) {
-            player.play(soundByte.getSoundID());
+            player.play(soundByte.getResource());
         }
     };
 
@@ -21,8 +20,8 @@ public class SoundByteButton extends android.support.v7.widget.AppCompatButton {
     }
 
 
-    public void setSoundByte(SoundByte soundByte) {
-        this.soundByte = soundByte;
+    public void setMediaAsset(MediaAsset soundByte) {
+        this.soundByte = (SoundByte) soundByte;
         this.setText(soundByte.getTitle());
         this.setOnClickListener(soundByteButtonClickListener);
     }

@@ -5,10 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class SoundBoardActivity extends AppCompatActivity {
     public static String PACKAGE_NAME;
+    ArrayList<MediaAsset> soundResources;
 
     private final MediaPlayer player = new SoundBytePlayer(this);
     private MediaMetadataResolver mediaMetadataResolver = new SoundMetadataResolver(this);
@@ -19,7 +20,7 @@ public class SoundBoardActivity extends AppCompatActivity {
 
         PACKAGE_NAME = getApplicationContext().getPackageName();
 
-        List<Integer> soundResources = ResourceListGenerator.generateList();
+        soundResources = new ArrayList<>(SoundByteListGenerator.generateList(player, mediaMetadataResolver));
 
         RecyclerView mRecyclerView = findViewById(R.id.soundbyte_recyclerview);
 
@@ -27,11 +28,8 @@ public class SoundBoardActivity extends AppCompatActivity {
                 new GridLayoutManager(this, 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        RecyclerView.Adapter mAdapter = new SoundByteAdapter(
-                this,
-                mediaMetadataResolver,
-                player
-                , soundResources);
+        RecyclerView.Adapter mAdapter = new SoundByteAdapter(mediaMetadataResolver, player,
+                soundResources);
         mRecyclerView.setAdapter(mAdapter);
 
 
