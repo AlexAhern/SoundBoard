@@ -4,9 +4,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class SoundByteListGenerator {
+class SoundByteListGenerator implements MediaAssetListGenerator {
 
-    static ArrayList<? extends MediaAsset> generateList(MediaPlayer player, MediaMetadataResolver mediaMetadataResolver) {
+     public ArrayList<? extends MediaAsset> generateList(MediaPlayer player, MediaMetadataResolver mediaMetadataResolver) {
         Field[] fields = R.raw.class.getFields();
         ArrayList<SoundByte> resourceList = new ArrayList<>();
         for (Field field : fields) {

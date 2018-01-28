@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 public class SoundBoardActivity extends AppCompatActivity {
     public static String PACKAGE_NAME;
-    ArrayList<MediaAsset> soundResources;
+    ArrayList<? extends MediaAsset> soundResources;
+    MediaAssetListGenerator mediaAssetListGenerator = new SoundByteListGenerator();
 
     private final MediaPlayer player = new SoundBytePlayer(this);
     private MediaMetadataResolver mediaMetadataResolver = new SoundMetadataResolver(this);
@@ -19,8 +20,7 @@ public class SoundBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sound_board);
 
         PACKAGE_NAME = getApplicationContext().getPackageName();
-
-        soundResources = new ArrayList<>(SoundByteListGenerator.generateList(player, mediaMetadataResolver));
+        soundResources = mediaAssetListGenerator.generateList(player, mediaMetadataResolver);
 
         RecyclerView mRecyclerView = findViewById(R.id.soundbyte_recyclerview);
 
