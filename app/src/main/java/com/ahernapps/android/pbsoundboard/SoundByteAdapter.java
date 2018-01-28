@@ -1,30 +1,39 @@
 package com.ahernapps.android.pbsoundboard;
 
+import android.content.Context;
+import android.media.MediaMetadataRetriever;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+
+import static com.ahernapps.android.pbsoundboard.SoundBoardActivity.PACKAGE_NAME;
 
 public class SoundByteAdapter extends RecyclerView.Adapter<SoundByteAdapter.ViewHolder> {
-    private ArrayList<SoundByte> mSoundBytes;
-    private SoundPool mPlayer;
+    private final MediaMetadataRetriever mMmr;
+    private final Context mContext;
+    private final List<Integer> mResourceList;
+    private final SoundPool mPlayer;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public SoundByteButton mButton;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        final SoundByteButton mButton;
 
-        public ViewHolder(Button v) {
+        ViewHolder(Button v) {
             super(v);
             mButton = (SoundByteButton) v;
         }
     }
 
-    public SoundByteAdapter(SoundPool player, ArrayList<SoundByte> soundBytes) {
+    SoundByteAdapter(Context context, SoundPool player, MediaMetadataRetriever mmr,
+                     List<Integer> resourceList) {
+        mMmr = mmr;
+        mContext = context;
         mPlayer = player;
-        mSoundBytes = soundBytes;
+        mResourceList = resourceList;
     }
 
     @Override
@@ -32,23 +41,23 @@ public class SoundByteAdapter extends RecyclerView.Adapter<SoundByteAdapter.View
         Button v = (SoundByteButton) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.soundbyte_button, parent, false);
 
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        try {
-            holder.mButton.setPlayer(mPlayer);
-            holder.mButton.setSoundByte(mSoundBytes.get(position));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        holder.mButton.setPlayer(mPlayer);
+        mMmr.setDataSource(mContext,  Uri.parse("android.resource://" + PACKAGE_NAME + "/" +
+                mResourceList.get(position)));
+
+        holder.mButton.setSoundByte(new SoundByte(
+                mMmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
+                mPlayer.load(mContext, mResourceList.get(position),1)));
     }
 
     @Override
     public int getItemCount() {
-        return mSoundBytes.size();
+        return mResourceList.size();
     }
 
 
