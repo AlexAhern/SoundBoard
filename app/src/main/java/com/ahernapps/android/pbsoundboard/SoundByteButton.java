@@ -7,12 +7,12 @@ import android.view.View;
 
 public class SoundByteButton extends android.support.v7.widget.AppCompatButton {
     private SoundByte soundByte;
-    private SoundPool player;
+    private MediaPlayer player;
 
     private final OnClickListener soundByteButtonClickListener = new OnClickListener() {
         @Override
         public void onClick(View view) {
-            player.play(soundByte.getSoundID(), 1, 1, 1, 0, 1);
+            player.play(soundByte.getSoundID());
         }
     };
 
@@ -27,7 +27,7 @@ public class SoundByteButton extends android.support.v7.widget.AppCompatButton {
         this.setOnClickListener(soundByteButtonClickListener);
     }
 
-    public void setPlayer(SoundPool player) {
+    public void setPlayer(MediaPlayer player) {
         this.player = player;
     }
 }

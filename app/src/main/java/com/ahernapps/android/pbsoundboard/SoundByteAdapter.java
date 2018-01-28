@@ -12,7 +12,7 @@ import java.util.List;
 public class SoundByteAdapter extends RecyclerView.Adapter<SoundByteAdapter.ViewHolder> {
     private final Context mContext;
     private final List<Integer> mResourceList;
-    private final SoundPool mPlayer;
+    private final MediaPlayer mPlayer;
     private final MediaMetadataResolver mMediaMetadataResolver;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -26,7 +26,7 @@ public class SoundByteAdapter extends RecyclerView.Adapter<SoundByteAdapter.View
 
     SoundByteAdapter(Context context,
                      MediaMetadataResolver mediaMetadataResolver,
-                     SoundPool player,
+                     MediaPlayer player,
                      List<Integer> resourceList) {
         mContext = context;
         mPlayer = player;
@@ -49,7 +49,7 @@ public class SoundByteAdapter extends RecyclerView.Adapter<SoundByteAdapter.View
         holder.mButton.setPlayer(mPlayer);
         holder.mButton.setSoundByte(
                 new SoundByte(mMediaMetadataResolver.resolve(resourceID),
-                mPlayer.load(mContext, resourceID, 1)));
+                mPlayer.load(resourceID)));
     }
 
     @Override
