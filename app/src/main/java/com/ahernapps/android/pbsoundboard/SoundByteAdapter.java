@@ -10,28 +10,25 @@ import java.util.List;
 public class SoundByteAdapter extends RecyclerView.Adapter<SoundByteAdapter.ViewHolder> {
     private final List<? extends MediaAsset> mResourceList;
     private final MediaPlayer mPlayer;
-    private final MediaMetadataResolver mMediaMetadataResolver;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        final SoundByteButton mButton;
+        final MediaAssetButton mButton;
 
         ViewHolder(Button v) {
             super(v);
-            mButton = (SoundByteButton) v;
+            mButton = (MediaAssetButton) v;
         }
     }
 
-    SoundByteAdapter(MediaMetadataResolver mediaMetadataResolver,
-                     MediaPlayer player,
+    SoundByteAdapter(MediaPlayer player,
                      List<? extends MediaAsset> resourceList) {
         mPlayer = player;
         mResourceList = resourceList;
-        mMediaMetadataResolver = mediaMetadataResolver;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Button v = (SoundByteButton) LayoutInflater.from(parent.getContext())
+        Button v = (MediaAssetButton) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.soundbyte_button, parent, false);
 
         return new ViewHolder(v);

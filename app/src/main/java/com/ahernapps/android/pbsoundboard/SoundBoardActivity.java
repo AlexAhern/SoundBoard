@@ -28,8 +28,7 @@ public class SoundBoardActivity extends AppCompatActivity {
                 new GridLayoutManager(this, 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        RecyclerView.Adapter mAdapter = new SoundByteAdapter(mediaMetadataResolver, player,
-                soundResources);
+        RecyclerView.Adapter mAdapter = new SoundByteAdapter(player, soundResources);
         mRecyclerView.setAdapter(mAdapter);
 
 

@@ -15,7 +15,7 @@ class SoundByte implements Comparable<SoundByte>, MediaAsset {
         return title;
     }
 
-    int getResource() {
+    public int getResource() {
         return resource;
     }
 
