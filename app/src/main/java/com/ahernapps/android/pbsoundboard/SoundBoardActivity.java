@@ -15,6 +15,8 @@ public class SoundBoardActivity extends AppCompatActivity {
     private final MediaPlayer player = new SoundBytePlayer(this);
     private MediaMetadataResolver mediaMetadataResolver = new SoundMetadataResolver(this);
 
+    private OnButtonClickListener onButtonClickListener = asset -> player.play(asset.getResource());
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sound_board);
@@ -28,9 +30,14 @@ public class SoundBoardActivity extends AppCompatActivity {
                 new GridLayoutManager(this, 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        RecyclerView.Adapter mAdapter = new SoundByteAdapter(player, soundResources);
+        RecyclerView.Adapter mAdapter = new SoundByteAdapter(onButtonClickListener, soundResources);
         mRecyclerView.setAdapter(mAdapter);
 
 
     }
+}
+
+
+interface OnButtonClickListener {
+    void onButtonClick(MediaAsset asset);
 }
